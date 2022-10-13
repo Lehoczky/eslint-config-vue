@@ -1,6 +1,6 @@
 {
   "name": "@lehoczky/eslint-config-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ESLint Config for Vue3 with TypeScript",
   "main": "index.cjs",
   "keywords": [],
@@ -21,8 +21,8 @@
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-define-config": "^1.7.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^27.1.1",
     "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-promise": "^6.0.1",

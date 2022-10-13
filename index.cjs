@@ -1,10 +1,13 @@
-/** @type {import("eslint").Linter.Config} */
-module.exports = {
+// @ts-check
+const { defineConfig } = require("eslint-define-config")
+
+module.exports = defineConfig({
   root: true,
   env: {
     es6: true,
     browser: true,
     node: true,
+    es2021: true,
   },
   plugins: [
     "only-warn",
@@ -26,11 +29,14 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     sourceType: "module",
+    ecmaVersion: "latest",
     extraFileExtensions: [".vue"],
   },
   settings: {
     "import/resolver": {
-      node: { extensions: [".js", ".jsx", ".mjs", ".ts", ".tsx", ".d.ts"] },
+      node: {
+        extensions: [".js", ".jsx", ".mjs", ".ts", ".tsx", ".d.ts", ".vue"],
+      },
     },
   },
   rules: {
@@ -150,7 +156,7 @@ module.exports = {
     "@typescript-eslint/prefer-for-of": "warn",
     "@typescript-eslint/prefer-function-type": "warn",
 
-    // Conflict with ESLint
+    // Conflicts with ESLint
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "default-param-last": "off",
@@ -172,7 +178,7 @@ module.exports = {
     {
       files: ["*.{ts,tsm,tsx,vue}"],
       parserOptions: {
-        project: ["./tsconfig.json"],
+        project: ["./tsconfig.eslint.json"],
       },
       rules: {
         // Requires type checking
@@ -185,7 +191,12 @@ module.exports = {
         "@typescript-eslint/no-misused-promises": "warn",
         "@typescript-eslint/no-unsafe-call": "warn",
         "@typescript-eslint/non-nullable-type-assertion-style": "warn",
-        "@typescript-eslint/prefer-nullish-coalescing": "warn",
+        "@typescript-eslint/prefer-nullish-coalescing": [
+          "warn",
+          {
+            ignoreTernaryTests: false,
+          },
+        ],
         "@typescript-eslint/prefer-return-this-type": "warn",
         "@typescript-eslint/prefer-string-starts-ends-with": "warn",
         "@typescript-eslint/prefer-optional-chain": "warn",
@@ -218,9 +229,9 @@ module.exports = {
         sourceType: "module",
       },
       rules: {
-        // 'no-unused-vars': 'off',
-        // 'no-undef': 'off',
-        // '@typescript-eslint/no-unused-vars': 'off',
+        // "no-unused-vars": "off",
+        "no-undef": "off",
+        // "@typescript-eslint/no-unused-vars": "off",
 
         "vue/component-api-style": ["warn", ["script-setup"]],
         "vue/component-name-in-template-casing": [
@@ -243,6 +254,11 @@ module.exports = {
         "vue/prefer-true-attribute-shorthand": "warn",
         "vue/v-on-function-call": ["warn", "never"],
         "vue/eqeqeq": ["warn", "smart"],
+
+        "vue/multi-word-component-names": "off",
+
+        // Does not work well with `defineEmits`
+        "@typescript-eslint/prefer-function-type": "off",
       },
     },
     {
@@ -252,14 +268,6 @@ module.exports = {
       rules: {
         "yml/plain-scalar": "warn",
       },
-    },
-    {
-      files: ["*.test.ts", "*.test.js", "*.spec.ts", "*.spec.js"],
-      env: {
-        "jest/globals": true,
-      },
-      plugins: ["jest"],
-      extends: ["plugin:jest/recommended"],
     },
     {
       files: ["*.d.ts"],
@@ -276,13 +284,11 @@ module.exports = {
   ],
   ignorePatterns: [
     "*.min.*",
-    "*.d.ts",
     "CHANGELOG.md",
     "dist",
     "LICENSE*",
     "output",
     "coverage",
-    "public",
     "temp",
     "package-lock.json",
     "pnpm-lock.yaml",
@@ -292,4 +298,4 @@ module.exports = {
     "!.vitepress",
     "!.vscode",
   ],
-};
+})
