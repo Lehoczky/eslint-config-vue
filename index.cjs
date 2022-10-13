@@ -176,7 +176,7 @@ module.exports = defineConfig({
   },
   overrides: [
     {
-      files: ["*.{ts,tsm,tsx,vue}"],
+      files: ["*.{ts,mts,tsx,vue}"],
       parserOptions: {
         project: ["./tsconfig.eslint.json"],
       },
@@ -188,7 +188,10 @@ module.exports = defineConfig({
         ],
         "@typescript-eslint/naming-convention": ["warn"],
         "@typescript-eslint/no-for-in-array": "warn",
-        "@typescript-eslint/no-misused-promises": "warn",
+        "@typescript-eslint/no-misused-promises": [
+          "warn",
+          { checksVoidReturn: false },
+        ],
         "@typescript-eslint/no-unsafe-call": "warn",
         "@typescript-eslint/non-nullable-type-assertion-style": "warn",
         "@typescript-eslint/prefer-nullish-coalescing": [
@@ -225,8 +228,6 @@ module.exports = defineConfig({
       parser: "vue-eslint-parser",
       parserOptions: {
         parser: "@typescript-eslint/parser",
-        ecmaVersion: "latest",
-        sourceType: "module",
       },
       rules: {
         // "no-unused-vars": "off",
@@ -243,7 +244,6 @@ module.exports = defineConfig({
         ],
         "vue/custom-event-name-casing": ["warn", "kebab-case"],
         "vue/define-emits-declaration": ["error", "type-based"],
-        "vue/define-props-declaration": ["error", "runtime"],
         "vue/next-tick-style": ["error", "promise"],
         "vue/no-ref-object-destructure": "warn",
         "vue/no-required-prop-with-default": "warn",
