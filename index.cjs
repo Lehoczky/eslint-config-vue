@@ -1,4 +1,5 @@
 // @ts-check
+require("@rushstack/eslint-patch/modern-module-resolution")
 const { defineConfig } = require("eslint-define-config")
 
 module.exports = defineConfig({
@@ -77,6 +78,7 @@ module.exports = defineConfig({
     "prefer-object-spread": "warn",
     "prefer-rest-params": "warn",
     "prefer-template": "warn",
+    radix: "warn",
     "require-await": "warn",
     yoda: ["warn", "never", { exceptRange: true }],
 
@@ -173,6 +175,7 @@ module.exports = defineConfig({
     "@typescript-eslint/no-explicit-any": "off",
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
   overrides: [
     {
@@ -186,7 +189,6 @@ module.exports = defineConfig({
           "warn",
           { ignoreArrowShorthand: true },
         ],
-        "@typescript-eslint/naming-convention": ["warn"],
         "@typescript-eslint/no-for-in-array": "warn",
         "@typescript-eslint/no-misused-promises": [
           "warn",
@@ -212,11 +214,45 @@ module.exports = defineConfig({
         "dot-notation": "off",
         "@typescript-eslint/dot-notation": "warn",
         "no-throw-literal": "off",
-        "@typescript-eslint/no-throw-literal": "warn",
+        "@typescript-eslint/no-throw-literal": [
+          "warn",
+          {
+            allowThrowingUnknown: true,
+          },
+        ],
         "require-await": "off",
         "@typescript-eslint/require-await": "warn",
         "no-return-await": "off",
         "@typescript-eslint/return-await": ["warn", "always"],
+        camelcase: "off",
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            selector: "variable",
+            types: ["boolean"],
+            format: ["PascalCase"],
+            prefix: [
+              "is",
+              "should",
+              "has",
+              "had",
+              "can",
+              "could",
+              "would",
+              "did",
+              "will",
+            ],
+          },
+          {
+            selector: "property",
+            format: ["strictCamelCase"],
+            filter: {
+              // you can expand this regex as you find more cases that require quoting that you want to allow
+              regex: "[- ]",
+              match: false,
+            },
+          },
+        ],
 
         // Conflict with unicorn
         "unicorn/prefer-includes": "off",
@@ -244,16 +280,34 @@ module.exports = defineConfig({
         ],
         "vue/custom-event-name-casing": ["warn", "kebab-case"],
         "vue/define-emits-declaration": ["error", "type-based"],
+        "vue/html-self-closing": ["warn", { html: { void: "always" } }],
         "vue/next-tick-style": ["error", "promise"],
         "vue/no-ref-object-destructure": "warn",
         "vue/no-required-prop-with-default": "warn",
         "vue/no-static-inline-styles": "warn",
         "vue/no-this-in-before-route-enter": "warn",
+        "vue/no-useless-mustaches": "warn",
         "vue/no-useless-v-bind": "warn",
+        "vue/component-tags-order": [
+          "error",
+          {
+            order: [
+              "i18n",
+              "template",
+              "script:not([setup])",
+              "script[setup]",
+              "style",
+            ],
+          },
+        ],
         "vue/prefer-separate-static-class": "warn",
         "vue/prefer-true-attribute-shorthand": "warn",
         "vue/v-on-function-call": ["warn", "never"],
+        "vue/dot-notation": "warn",
         "vue/eqeqeq": ["warn", "smart"],
+        "vue/no-sparse-arrays": "warn",
+        "vue/no-useless-concat": "warn",
+        "vue/prefer-template": "warn",
 
         "vue/multi-word-component-names": "off",
 
