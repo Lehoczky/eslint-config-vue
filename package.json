@@ -1,8 +1,12 @@
 {
   "name": "@lehoczky/eslint-config-vue",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "ESLint Config for Vue3 with TypeScript",
   "main": "index.cjs",
+  "files": [
+    "index.cjs",
+    "getTsConfig.cjs"
+  ],
   "keywords": [],
   "author": {
     "name": "Zoltan Lehoczky",

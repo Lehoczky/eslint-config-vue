@@ -1,5 +1,6 @@
 // @ts-check
 require("@rushstack/eslint-patch/modern-module-resolution")
+const { getTsConfig } = require("./getTsConfig.cjs")
 const { defineConfig } = require("eslint-define-config")
 
 module.exports = defineConfig({
@@ -176,12 +177,15 @@ module.exports = defineConfig({
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    // https://typescript-eslint.io/docs/linting/troubleshooting/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+    "no-undef": "off",
   },
   overrides: [
     {
-      files: ["*.{ts,mts,tsx,vue}"],
+      files: ["*.ts", "*.mts", "*.cts", "*.tsx", "*.vue"],
       parserOptions: {
-        project: ["./tsconfig.eslint.json"],
+        project: getTsConfig(),
       },
       rules: {
         // Requires type checking
@@ -194,7 +198,6 @@ module.exports = defineConfig({
           "warn",
           { checksVoidReturn: false },
         ],
-        "@typescript-eslint/no-unsafe-call": "warn",
         "@typescript-eslint/non-nullable-type-assertion-style": "warn",
         "@typescript-eslint/prefer-nullish-coalescing": [
           "warn",
@@ -267,7 +270,6 @@ module.exports = defineConfig({
       },
       rules: {
         // "no-unused-vars": "off",
-        "no-undef": "off",
         // "@typescript-eslint/no-unused-vars": "off",
 
         "vue/component-api-style": ["warn", ["script-setup"]],
