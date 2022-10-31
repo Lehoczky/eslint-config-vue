@@ -146,7 +146,10 @@ module.exports = defineConfig({
         objectLiteralTypeAssertions: "allow-as-parameter",
       },
     ],
-    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      { disallowTypeAnnotations: false },
+    ],
     "@typescript-eslint/explicit-member-accessibility": [
       "warn",
       { accessibility: "no-public" },
@@ -229,29 +232,14 @@ module.exports = defineConfig({
         "@typescript-eslint/return-await": ["warn", "always"],
         camelcase: "off",
         "@typescript-eslint/naming-convention": [
+          // Ignore properties that require quotes
           "warn",
-          {
-            selector: "variable",
-            types: ["boolean"],
-            format: ["PascalCase"],
-            prefix: [
-              "is",
-              "should",
-              "has",
-              "had",
-              "can",
-              "could",
-              "would",
-              "did",
-              "will",
-            ],
-          },
           {
             selector: "property",
             format: ["strictCamelCase"],
             filter: {
               // you can expand this regex as you find more cases that require quoting that you want to allow
-              regex: "[- ]",
+              regex: "^[A-Z]|[- ]",
               match: false,
             },
           },
