@@ -235,7 +235,7 @@ module.exports = defineConfig({
           "warn",
           {
             selector: "property",
-            format: ["strictCamelCase"],
+            format: ["camelCase"],
             filter: {
               // you can expand this regex as you find more cases that require quoting that you want to allow
               regex: "^[A-Z]|[- ]",
