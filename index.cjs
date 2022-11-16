@@ -156,7 +156,6 @@ module.exports = defineConfig({
     "@typescript-eslint/no-confusing-non-null-assertion": "warn",
     "@typescript-eslint/no-duplicate-enum-values": "warn",
     "@typescript-eslint/no-extraneous-class": "warn",
-    "@typescript-eslint/no-invalid-void-type": "warn",
     "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "warn",
     "@typescript-eslint/prefer-for-of": "warn",
     "@typescript-eslint/prefer-function-type": "warn",
